@@ -12,4 +12,4 @@ app.use(cors({origin: "http://localhost:3000"}));
 require('./config/mongoose.config');
 require('./routes/userRoutes')(app);
 
-app.listen(8000, () => console.log("The server is all fired up on port 8000"));
+app.listen(8081, () => console.log("The server is all fired up on port 8081"));
