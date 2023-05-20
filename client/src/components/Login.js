@@ -32,9 +32,9 @@ const Login = (props)=> {
             <form onSubmit = {loginHandler} >
                 <label>Email:</label>
                 <input type="text" name="email" value={userLogin.email} onChange={changeHandler}></input>
-                <lable>Password:</lable>
+                <label>Password:</label>
                 <input type="password" name="password" value={userLogin.password} onChange={changeHandler}></input>
-                <button classname='btn btn-dark mt-3'>Login</button> 
+                <button className='btn btn-dark mt-3'>Login</button> 
                 <br/>
                 <Link to= {'/'}>Register Account</Link>
             </form>
