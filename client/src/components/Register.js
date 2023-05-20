@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios'
-import{useNavigate} from 'react-router-dom'
+import{useNavigate,Link} from 'react-router-dom'
 const Register = (props)=>{
     const navigate = useNavigate()
     const[user,setUser]=useState({
@@ -17,7 +17,7 @@ const Register = (props)=>{
     //Submit Handler
     const submitHandler = (e)=>{
         e.preventDefault();
-        axios.post('http//localhost:8080/api/register',user,{withCredentials:true})
+        axios.post('http://localhost:8080/api/register',user,{withCredentials:true})
             .then((res)=>{
                 console.log(res);
                 navigate('/dashboard')
@@ -52,6 +52,7 @@ const Register = (props)=>{
                 </div>
                 <button>Register</button>
             </form>
+            <Link to={'/login'}>Already Existing Account </Link>
         </div>
     )
 }
