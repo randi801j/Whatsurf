@@ -6,7 +6,7 @@ const EditBreak =(props)=>{
 
     const {id}= useParams()
     const navigate = useNavigate()
-    const [break,setBreak] = useState({
+    const [beachBreak,setBeachBreak] = useState({
         name: '',
         temperature: '', 
         waveHeight:'',
@@ -18,7 +18,7 @@ const EditBreak =(props)=>{
     const[oneBreak,setOneBreak]= useState({})
 
     const changeHandler = (e)=>{
-        setBreak({...break,[e.target.name]: e.target.value})
+        setBreak({...beachBreak,[e.target.name]: e.target.value})
     }
 
     useEffect(()=>{
@@ -33,7 +33,7 @@ const EditBreak =(props)=>{
 
     const submitHandler = (e)=>{
         e.preventDefault();
-        axios.put(`http://localhost:8080/api/updatebreak/${id}`,break)
+        axios.put(`http://localhost:8080/api/updatebreak/${id}`,beachBreak)
             .then((res)=>{
                 console.log(res);
                 navigate('/')
@@ -50,34 +50,34 @@ const EditBreak =(props)=>{
             <h1> Edit</h1>
             <form onSubmit= {submitHandler}> 
                 <label >Break Name:</label>
-                <input type= 'text' onChange={changeHandler} value={break.name} name='name'/>
+                <input type= 'text' onChange={changeHandler} value={beachBreak.name} name='name'/>
                 {
                     errors.name?
                     <p>{errors.name.message}</p>: null
                 }
                 <label >Break Temperature:</label>
-                <input  type= 'text' onChange={changeHandler} value={break.temperature} name='temperature'/>
+                <input  type= 'text' onChange={changeHandler} value={beachBreak.temperature} name='temperature'/>
                 {
                     errors.temperature?
                     <p >{errors.temperature.message}</p>: null
                 }
                 <label>Break Wave Height:</label>
-                <input  type= 'text' onChange={changeHandler} value={break.waveHeight} name='waveHeight'/>
+                <input  type= 'text' onChange={changeHandler} value={beachBreak.waveHeight} name='waveHeight'/>
                 {
                     errors.waveHeight?
                     <p >{errors.windDirection.message}</p>: null
                 }
                 <label>Wind Direction:</label>
-                <input  type= 'text' onChange={changeHandler} value={break.windDirection} name='windDirection'/>
+                <input  type= 'text' onChange={changeHandler} value={beachBreak.windDirection} name='windDirection'/>
                 {
-                    errors.skillOne?
-                    <p >{errors.skillOne.message}</p>: null
+                    errors.windDirection?
+                    <p >{errors.windDirection.message}</p>: null
                 }
                 <label>Notes:</label>
-                <input type= 'text' onChange={changeHandler} value={break.notes} name='notes'/>
+                <input type= 'text' onChange={changeHandler} value={beachBreak.notes} name='notes'/>
                 {
-                    errors.skillTwo?
-                    <p >{errors.skillTwo.message}</p>: null
+                    errors.notes?
+                    <p >{errors.notes.message}</p>: null
                 }
                 <button>Edit Break</button>
             </form>
