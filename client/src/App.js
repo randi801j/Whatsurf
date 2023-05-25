@@ -18,7 +18,7 @@ function App() {
           <Route path='/' element={<Register/>}/>
           <Route path='/dashboard'element={<Dashboard breakList={breakList} setBreakList={setBreakList}/>}/>
           <Route path='/login' element= {<Login/>}/>
-          <Route path='/edit' element= {<EditBreak/>}/>
+          <Route path='/edit/:id' element= {<EditBreak/>}/>
           <Route path='/createBreak' element= {<BreakForm/>}/>
           <Route path='/break/:id' element= {<DisplayBreak/>}/>
         </Routes>

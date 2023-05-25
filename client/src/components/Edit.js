@@ -15,10 +15,9 @@ const EditBreak =(props)=>{
     })
 
     const [errors,setErrors]= useState({})
-    const[oneBreak,setOneBreak]= useState({})
 
     const changeHandler = (e)=>{
-        setOneBreak({...beachBreak,[e.target.name]: e.target.value})
+        setBeachBreak({...beachBreak,[e.target.name]: e.target.value})
     }
 
     useEffect(()=>{
@@ -36,7 +35,7 @@ const EditBreak =(props)=>{
         axios.put(`http://localhost:8080/api/updatebreak/${id}`,beachBreak)
             .then((res)=>{
                 console.log(res);
-                navigate('/')
+                navigate('/dashboard')
             })
             .catch((err)=>{
                 console.log(err);
@@ -56,13 +55,13 @@ const EditBreak =(props)=>{
                     <p>{errors.name.message}</p>: null
                 }
                 <label >Break Temperature:</label>
-                <input  type= 'text' onChange={changeHandler} value={beachBreak.temperature} name='temperature'/>
+                <input  type= 'number' onChange={changeHandler} value={beachBreak.temperature} name='temperature'/>
                 {
                     errors.temperature?
                     <p >{errors.temperature.message}</p>: null
                 }
                 <label>Break Wave Height:</label>
-                <input  type= 'text' onChange={changeHandler} value={beachBreak.waveHeight} name='waveHeight'/>
+                <input  type= 'number' onChange={changeHandler} value={beachBreak.waveHeight} name='waveHeight'/>
                 {
                     errors.waveHeight?
                     <p >{errors.windDirection.message}</p>: null

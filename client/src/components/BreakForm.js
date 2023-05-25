@@ -34,7 +34,7 @@ const BreakForm = (props) => {
             .then(response => {
                 console.log("success")
                 console.log(response.data)
-                navigate(`/break/${response.data._id}`)
+                navigate(`/dashboard`)
             })
             .catch(err => {
                 console.log(err.config.data)

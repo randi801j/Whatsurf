@@ -6,8 +6,8 @@ import wave from '../img/breaking_wave.jpg';
 
 const Dashboard = (props) => {
 
-    const {id} = useParams()
-    console.log(id);
+    const { id } = useParams()
+    // console.log(id);
 
     const navigate = useNavigate()
 
@@ -63,7 +63,7 @@ const Dashboard = (props) => {
                                 <Link to={'#'} className="nav-link">My Breaks</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to={'/breaks/new'} className="nav-link">Add Breaks</Link>
+                                <Link to={'/createBreak'} className="nav-link">Add Breaks</Link>
                             </li>
                             <li className="nav-item">
                                 <button className="nav-link btn btn-link" onClick={logout}>Logout</button>
@@ -75,9 +75,9 @@ const Dashboard = (props) => {
             <div className="container">
                 <h3 className="mt-3">Breaks</h3>
                 {
-                    breakList.map((beachBreak) => (
-                        <div className="card mb-3" style={{maxWidth: '540px'}}>
-                            <h5 class="card-header bg-light border border-dark">{beachBreak.name}</h5>
+                    breakList.map((beachBreak, index) => (
+                        <div key={index} className="card mb-3" style={{maxWidth: '540px'}}>
+                            <h5 className="card-header bg-light border border-dark"><Link to={`/break/${beachBreak._id}`}>{beachBreak.name}</Link></h5>
                             <div className="row g-0">
                                 <div className="col-md-4">
                                     <img src={wave} className="img-fluid rounded-start" alt="..."/>
@@ -85,12 +85,12 @@ const Dashboard = (props) => {
                                 <div className="col-md-8">
                                     <div className="card-body">
                                         <h6 className="card-text">Description:</h6>
-                                        <p className="card-text">Temperature: {beachBreak.description?.temperature} degrees</p>
-                                        <p className="card-text">Wave height: {beachBreak.description?.waveHeight} feet</p>
-                                        <p className="card-text">Wind direction: {beachBreak.description?.windDirection}</p>
+                                        <p className="card-text">Temperature: {beachBreak.temperature} degrees</p>
+                                        <p className="card-text">Wave height: {beachBreak.waveHeight} feet</p>
+                                        <p className="card-text">Wind direction: {beachBreak.windDirection}</p>
                                         <p className="card-text"><small className="text-muted">Notes: {beachBreak.notes}</small></p>
                                         <button className="btn btn-danger" onClick={() => deleteHandler(beachBreak._id)}>Delete Break 🌊</button>
-                                        <Link to={`/breaks/${beachBreak._id}/edit`} className="btn btn-secondary m-1">Edit</Link>
+                                        <Link to={`/edit/${beachBreak._id}`} className="btn btn-secondary m-1">Edit</Link>
                                     </div>
                                 </div>
                             </div>
