@@ -16,6 +16,7 @@ module.exports = {
                 res.status(200).json(newBreak)
             })
             .catch((err) => {
+                console.log("The error is:", err)
                 res.status(400).json(err)
             })
     },
@@ -29,7 +30,7 @@ module.exports = {
             })
     },
     updateBreak: (req, res) => {
-        Break.findOneAndUpdate(        
+        Break.findOneAndUpdate(
             {_id: req.params.id}, 
             req.body, 
             {new:true, runValidators:true})

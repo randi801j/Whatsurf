@@ -9,7 +9,7 @@ module.exports = {
         try{
             const potentialUser= await User.findOne({email:req.body.email})
             if(potentialUser){
-                res.staus(400).json({message:'Email Already Exsit'})
+                res.status(400).json({message:'Email Already Exists'})
             }
             else{
                 const newUser = await User.create(req.body);
@@ -25,14 +25,14 @@ module.exports = {
     },
     loginUser: async (req,res)=>{
         try{
-            const exsitUser= await User. findOne({email: req.body.email})
-            if(exsitUser){
+            const existUser= await User. findOne({email: req.body.email})
+            if(existUser){
                 //check to see if cred matches, its a boolean
-                const passwordMatch = await bcrypt.compare(req.body.password,exsitUser.password)
+                const passwordMatch = await bcrypt.compare(req.body.password,existUser.password)
                 if(passwordMatch){
                     //log user in/ generate token
-                    const userToken = jwt.sign({_id:exsitUser._id,email:exsitUser},secret,{expiresIn:'24h'})
-                    res.status(201).cookie('userToken',userToken,{httpOnly:true,maxAge:2*60*60*1000}).json(exsitUser);
+                    const userToken = jwt.sign({_id:existUser._id,email:existUser},secret,{expiresIn:'24h'})
+                    res.status(201).cookie('userToken',userToken,{httpOnly:true,maxAge:2*60*60*1000}).json(existUser);
                 }
                 else{
                     //what if password does not match?
@@ -79,7 +79,7 @@ module.exports = {
     },
     updateUser: (req,res)=>{
         User.findOneAndUpdate({_id:req.params.id},req,body,{new:true,runValidators:true})
-            .then((uodateUser)=>{
+            .then((updateUser)=>{
                 res.status(200).json(updateUser)
             })
             .catch((err)=>{
