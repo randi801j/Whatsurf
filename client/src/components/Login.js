@@ -1,42 +1,42 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import {useNavigate,Link} from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 
-const Login = (props)=> {
-    const navigate = useNavigate
-    const [userLogin,setUserLogin]= useState({
-        email:'',
-        password:''
+const Login = (props) => {
+    const navigate = useNavigate()
+    const [userLogin, setUserLogin] = useState({
+        email: '',
+        password: ''
     })
 
     const changeHandler = (e) => {
-        setUserLogin ({... userLogin, [e.target.name]:e.target.value})
+        setUserLogin({ ...userLogin, [e.target.name]: e.target.value })
     }
 
-    const loginHandler = (e) =>{
+    const loginHandler = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8080/api/login',userLogin,{withCredentials:true})
-            .then((res)=>{
+        axios.post('http://localhost:8080/api/login', userLogin, { withCredentials: true })
+            .then((res) => {
                 console.log(res);
                 navigate('/dashboard')
             })
-            .catch((err)=>{
+            .catch((err) => {
                 console.log(err);
             })
     }
 
-    return(
+    return (
         <div>
             <h1>Log In </h1>
-            <form onSubmit = {loginHandler} >
+            <form onSubmit={loginHandler} >
                 <label>Email:</label>
                 <input type="text" name="email" value={userLogin.email} onChange={changeHandler}></input>
                 <label>Password:</label>
                 <input type="password" name="password" value={userLogin.password} onChange={changeHandler}></input>
-                <button className='btn btn-dark mt-3'>Login</button> 
-                <br/>
-                <Link to= {'/'}>Register Account</Link>
+                <button className='btn btn-dark mt-3'>Login</button>
+                <br />
+                <Link to={'/'}>Register Account</Link>
             </form>
         </div>
     )
