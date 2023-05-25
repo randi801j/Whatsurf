@@ -22,6 +22,16 @@ const BreakForm = (props) => {
         setNewBreak({ ...newBreak, [e.target.name]: e.target.value })
     }
 
+    const logout =()=> {
+        axios.post('http://localhost:8080/api/logout',{},{withCredentials:true})
+            .then((res)=>{
+                navigate('/')
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
     const createHandler = (e) => {
         e.preventDefault();
         axios.post("http://localhost:8080/api/newBreak", {
@@ -50,34 +60,59 @@ const BreakForm = (props) => {
     }
     return (
         <div>
-            <form onSubmit={(e) => createHandler(e)}>
-                <div>
-                    <h1>Create your own Break!</h1>
-                    <Link to={"/dashboard"}>Dashboard</Link>
-                    {errors.map((error, index) => <p key={index}>{error}</p>)}
-                    <label htmlFor='name'>Break Name: </label>
-                    <input name='name' type='text' value={newBreak.name} onChange={changeHandler} />
+            <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "#020887"}}>
+                <div className="container-fluid">
+                    <h1 className="text-white">What'Surf</h1>
+                    <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNavAltMarkup">
+                        {/* Insert nav-links here */}
+                        <ul className="nav nav-tabs">
+                            <li className="nav-item">
+                                <Link to={'/dashboard'} className="nav-link" style={{color: "#C6EBBE"}}>Dashboard</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={'#'} className="nav-link" style={{color: "#C6EBBE"}}>My Breaks</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={'#'} className="nav-link active" aria-current="page" style={{color: "#020887", backgroundColor: "#C6EBBE"}}>Add Breaks</Link>
+                            </li>
+                            <li className="nav-item">
+                                <button className="nav-link btn btn-link" style={{color: "#C6EBBE"}} onClick={logout}>Logout</button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor='temperature'>Break Temperature: </label>
-                    <input name='temperature' type='number' value={newBreak.temperature} onChange={changeHandler} />
+            </nav>
+            <div className="container">
+                <div className='d-flex justify-content-center'>
+                    <form className='w-50 border border-dark mt-4 p-3' style={{backgroundColor: '#A9DBB8'}} onSubmit={(e) => createHandler(e)}>
+                        <h2>Create your own Break!</h2>
+                        <div className='mt-3'>
+                            {errors.map((error, index) => <p style={{color: '#F72323'}} key={index}>{error}</p>)}
+                            <label className='form-label' htmlFor='name'>Break Name: </label>
+                            <input className='form-control border border-dark' name='name' type='text' value={newBreak.name} onChange={changeHandler} />
+                        </div>
+                        <div className='mt-2'>
+                            <label className='form-label' htmlFor='temperature'>Break Temperature: </label>
+                            <input className='form-control border border-dark' name='temperature' type='number' value={newBreak.temperature} onChange={changeHandler} />
+                        </div>
+                        <div className='mt-2'>
+                            <label className='form-label' htmlFor='waveHeight'>Break Wave Height: </label>
+                            <input className='form-control border border-dark' name='waveHeight' type='number' value={newBreak.waveHeight} onChange={changeHandler} />
+                        </div>
+                        <div className='mt-2'>
+                            <label className='form-label' htmlFor='windDirection'>Wind Direction: </label>
+                            <input className='form-control border border-dark' name='windDirection' type='text' value={newBreak.windDirection} onChange={changeHandler} />
+                        </div>
+                        <div className='mt-2'>
+                            <label className='form-label' htmlFor='notes'>Notes: </label>
+                            <textarea className='form-control border border-dark' name='notes' value={newBreak.notes} onChange={changeHandler} />
+                        </div>
+                        <div className='mt-3 d-flex justify-content-end'>
+                            <button className='btn' style={{backgroundColor: '#38369A', color: 'white'}} onClick={createHandler}>Create New Break</button>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <label htmlFor='waveHeight'>Break Wave Height: </label>
-                    <input name='waveHeight' type='number' value={newBreak.waveHeight} onChange={changeHandler} />
-                </div>
-                <div>
-                    <label htmlFor='windDirection'>Wind Direction: </label>
-                    <input name='windDirection' type='text' value={newBreak.windDirection} onChange={changeHandler} />
-                </div>
-                <div>
-                    <label htmlFor='notes'>Notes: </label>
-                    <textarea name='notes' value={newBreak.notes} onChange={changeHandler} />
-                </div>
-                <div>
-                    <button onClick={createHandler}>Create New Break</button>
-                </div>
-            </form>
+            </div>
         </div>
     )
 }
