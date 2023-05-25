@@ -53,7 +53,7 @@ const BreakForm = (props) => {
             <form onSubmit={(e) => createHandler(e)}>
                 <div>
                     <h1>Create your own Break!</h1>
-                    <Link to={"/"}>Home</Link>
+                    <Link to={"/dashboard"}>Dashboard</Link>
                     {errors.map((error, index) => <p key={index}>{error}</p>)}
                     <label htmlFor='name'>Break Name: </label>
                     <input name='name' type='text' value={newBreak.name} onChange={changeHandler} />
