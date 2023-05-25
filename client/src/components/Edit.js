@@ -18,13 +18,13 @@ const EditBreak =(props)=>{
     const[oneBreak,setOneBreak]= useState({})
 
     const changeHandler = (e)=>{
-        setBreak({...beachBreak,[e.target.name]: e.target.value})
+        setOneBreak({...beachBreak,[e.target.name]: e.target.value})
     }
 
     useEffect(()=>{
         axios.get(`http://localhost:8080/api/oneBreak/${id}`)
             .then((res)=>{
-                setShelter(res.data)
+                setBeachBreak(res.data)
             })
             .catch((err)=>{
                 console.log(err);
@@ -85,4 +85,4 @@ const EditBreak =(props)=>{
     )
 }
 
-export default EditWave;
+export default EditBreak;
